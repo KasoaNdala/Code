@@ -206,21 +206,98 @@
 
 
 let canvas = document.getElementById('canvas');
-console.log('Canvas: ' + canvas)
+// console.log('Canvas: ' + canvas)
 
-canvas.innerWidth = window.innerWidth;
-canvas.innerHeight = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
-console.log('Context: ' + ctx)
+// console.log('Context: ' + ctx)
 
 
-ctx.fillStyle = "#0000FF";
-ctx.fillRect(300, 300, 350, 350);
+// ctx.fillStyle = "#0000FF";
+// ctx.fillRect(300, 300, 350, 350);
 
 
-ctx.fillStyle = 'rgba(0, 255, 0, .5)'
-ctx.fillRect(100, 10, 150, 100);
+// ctx.fillStyle = 'rgba(0, 255, 0, .5)'
+// ctx.fillRect(100, 10, 150, 100);
 
-console.log(window.innerHeight)
-console.log(window.innerWidth)
+
+let ticker = 0;
+let deltaTime = 50; // Tick time in MS
+
+let x = 0;
+let y = 0;
+
+
+
+start();
+
+// Do setup and start the loop.
+function start() {
+  console.log('started...');
+
+  addKeyboardListeners(); 
+
+  update();
+}
+
+// Loop function that is called once every deltaTime milliseconds.
+function update() {
+  tick();
+
+  clear();
+
+  // move();
+
+  draw();
+  
+  setTimeout(() => {
+    update();
+  }, deltaTime);
+}
+
+// Changes the variables that determine where stuff is.   
+// function move() {
+//   x++;
+// }
+
+// Draws all object on the screen.
+function draw() {
+  ctx.fillRect(x, y, 100, 100)
+}
+
+// Just clears the entire canvas.
+function clear() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Count the ticks and print every 10th tick.
+function tick() {
+  ticker++;
+  if (ticker % 10 == 0) {
+    console.log(ticker);
+  }
+}
+
+function addKeyboardListeners() {
+  document.onkeydown = (e) => {
+    console.log(e.key)
+    switch (e.key) {
+      case 'd':
+        y++
+        break;
+      case 'e':
+        y--
+        break;
+      case 'f':
+        x++
+        break;
+      case 's':
+        x--
+        break;
+      default:
+        break;
+    }
+  }
+}
