@@ -18,4 +18,8 @@ button {
 input {
     border-color: bisque;
     border-width: 0.1rem;
-}
+} 
+/* canvas {
+    width: 100%;
+    height: 100%;
+} */
