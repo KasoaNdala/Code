@@ -1,0 +1,21 @@
+.para {
+    color: rgb(228, 33, 33);
+    font-size:xx-large;
+}
+img {
+    border-radius: 5rem; 
+    border: solid;
+    border-width: 1rem;
+    border-color: bisque;
+    width: 35rem;
+
+}
+button {
+    height: 3.5rem;
+    width: 4.8rem;
+}
+
+input {
+    border-color: bisque;
+    border-width: 0.1rem;
+}
