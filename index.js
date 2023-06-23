@@ -1,6 +1,8 @@
 // import {axios} from 'axios';
 // const axios = require('axios');
 
+// Das ist ein Change den ich gemacht hab! :)
+
 function func2 (thisiswhatiwriteintheklammern) {
     let element // Es gibt eine variable und die heist element
     element = document.getElementById("paraid") // mach das html element in die variable element
