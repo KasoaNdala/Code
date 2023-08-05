@@ -204,7 +204,6 @@
 
 // const THIS_IS_A_CONSTANT = 0;
 
-
 let canvas = document.getElementById('canvas');
 // console.log('Canvas: ' + canvas)
 
@@ -223,34 +222,50 @@ let ctx = canvas.getContext('2d');
 // ctx.fillRect(100, 10, 150, 100);
 
 
-let ticker = 0;
-let deltaTime = 50; // Tick time in MS
+let ticker = 0
+let deltaTime = 50 // Tick time in MS
 
-let x = 0;
-let y = 0;
+// let x = 0
+// let y = 0
 
+let objects = []
+let mouse
 
+let otherRect = new rect(window.innerWidth / 2, window.innerHeight / 2, 250)
 
-start();
+start()
 
 // Do setup and start the loop.
 function start() {
-  console.log('started...');
+  console.log('started...')
 
-  addKeyboardListeners(); 
+  addKeyboardListeners()
 
-  update();
+  mouse = new mouseManager(150)
+
+  objects.push(otherRect)
+
+  objects.push(new object(10, 10, 50, 50))
+
+  update()
 }
 
 // Loop function that is called once every deltaTime milliseconds.
 function update() {
-  tick();
+  tick()
 
-  clear();
+  clear()
 
+  draw()
+
+  objects.forEach(object => {
+    object.draw(ctx)
+  });
   // move();
+  // applyPhysics()
 
-  draw();
+
+
   
   setTimeout(() => {
     update();
@@ -264,7 +279,26 @@ function update() {
 
 // Draws all object on the screen.
 function draw() {
-  ctx.fillRect(x, y, 100, 100)
+  drawGrid(10, "#eee")
+  drawGrid(100, "#aaa")
+
+  mouse.mouseUpdate(ctx)
+
+  // ctx.fillRect(x, y, 100, 100)
+}
+
+function drawGrid(gridSize, color) {
+  let rows = canvas.height / gridSize;
+  let cols = canvas.width / gridSize;
+
+  ctx.strokeStyle = color; // Choose the color of your grid lines
+
+  // Draw the grid
+  for (var row = 0; row < rows; row++) {
+    for (var col = 0; col < cols; col++) {
+      ctx.strokeRect(col * gridSize, row * gridSize, gridSize, gridSize);
+    }
+  }
 }
 
 // Just clears the entire canvas.
